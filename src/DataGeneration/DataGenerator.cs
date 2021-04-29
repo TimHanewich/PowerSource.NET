@@ -87,6 +87,17 @@ namespace PowerSource.DataGeneration
             City = ToReturn.ToArray();
         }
         
+        //Country
+        public async Task LoadCountries(Stream file)
+        {
+            Country = await PowerSourceToolkit.DelimitedFileToLineArrayAsync(file);
+        }
+
+        //Job Title
+        public async Task LoadJobTitles(Stream file)
+        {
+            JobTitle = await PowerSourceToolkit.DelimitedFileToLineArrayAsync(file);
+        }
 
         #endregion
 
@@ -348,9 +359,10 @@ namespace PowerSource.DataGeneration
 
         #endregion
     
-        #region "State/Cities"
+        #region "State/Cities/Countries"
 
         private UsCity[] City;
+        private string[] Country;
 
         public UsCity RandomUsCity()
         {
@@ -387,6 +399,22 @@ namespace PowerSource.DataGeneration
             }
             int r = new Random().Next(0, AllStates.Count);
             return AllStates[r];
+        }
+
+        public string RandomCountry()
+        {
+            return PowerSourceToolkit.RandomFromArray(Country);
+        }
+
+        #endregion
+    
+        #region "Job Titles"
+
+        private string[] JobTitle;
+
+        public string RandomJobTitle()
+        {
+            return PowerSourceToolkit.RandomFromArray(JobTitle);
         }
 
         #endregion
