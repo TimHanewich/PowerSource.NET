@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using System.Threading;
 using System.IO;
 using System.Collections.Generic;
+using TimHanewich.Csv;
+using TimHanewich.DataSetManagement;
 
 namespace PowerSource.DataGeneration
 {
@@ -50,6 +52,41 @@ namespace PowerSource.DataGeneration
         {
             Url = await PowerSourceToolkit.DelimitedFileToLineArrayAsync(file);
         }
+
+        //Cities
+        public void LoadCities(string csv_content)
+        {
+            DataSet ds = DataSet.CreateFromCsvFileContent(csv_content);
+            List<UsCity> ToReturn = new List<UsCity>();
+            foreach (DataRecord dr in ds.Records)
+            {
+                UsCity city = new UsCity();
+                city.Name = dr.GetDataAttribute("city").Value;
+                city.State = PowerSourceToolkit.UsStateNameToEnum(dr.GetDataAttribute("state_name").Value);
+                city.StateId = dr.GetDataAttribute("state_id").Value;
+                city.CountyName = dr.GetDataAttribute("county_name").Value;
+                city.Latitude = Convert.ToSingle(dr.GetDataAttribute("lat").Value);
+                city.Longitude = Convert.ToSingle(dr.GetDataAttribute("lng").Value);
+                city.Population = Convert.ToInt32(dr.GetDataAttribute("population").Value);
+                city.Density = Convert.ToInt32(dr.GetDataAttribute("density").Value);
+
+                //Get zips
+                string zips = dr.GetDataAttribute("zips").Value;
+                List<string> Splitter = new List<string>();
+                Splitter.Add(" ");
+                string[] zips_arr = zips.Split(Splitter.ToArray(), StringSplitOptions.RemoveEmptyEntries);
+                List<int> ZipsToAtt = new List<int>();
+                foreach (string s in zips_arr)
+                {
+                    ZipsToAtt.Add(Convert.ToInt32(s));
+                }
+                city.ZipCodes = ZipsToAtt.ToArray();
+
+                ToReturn.Add(city);
+            }
+            City = ToReturn.ToArray();
+        }
+        
 
         #endregion
 
@@ -307,6 +344,38 @@ namespace PowerSource.DataGeneration
         public string RandomUrl()
         {
             return PowerSourceToolkit.RandomFromArray(Url);
+        }
+
+        #endregion
+    
+        #region "State/Cities"
+
+        private UsCity[] City;
+
+        public UsCity RandomUsCity()
+        {
+            if (City == null)
+            {
+                throw new Exception("City data has not been loaded.");
+            }
+
+            int r = new Random().Next(0, City.Length);
+            return City[r];
+        }
+
+        public UsCity RandomUsCity(UsState in_state)
+        {
+            List<UsCity> CitiesInThisState = new List<UsCity>();
+            foreach (UsCity city in City)
+            {
+                if (city.State == in_state)
+                {
+                    CitiesInThisState.Add(city);
+                }
+            }
+
+            int r = new Random().Next(0, CitiesInThisState.Count);
+            return CitiesInThisState[r];
         }
 
         #endregion
