@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace PowerSource.DataGeneration
 {
-    public class NameGenerator
+    public class DataGenerator
     {
         private string[] MaleFirstName;
         private string[] FemaleFirstName;
@@ -30,6 +30,8 @@ namespace PowerSource.DataGeneration
         }
         
         #endregion
+
+        #region "Names"
 
         #region  "Core"
 
@@ -78,5 +80,7 @@ namespace PowerSource.DataGeneration
         {
             return RandomFemaleFirstName() + " " + RandomLastName();
         }
+    
+        #endregion
     }
 }
