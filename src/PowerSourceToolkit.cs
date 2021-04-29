@@ -72,7 +72,7 @@ namespace PowerSource
             KVPs.Add(new KeyValuePair<string, UsState>("Arizona", UsState.Arizona));
             KVPs.Add(new KeyValuePair<string, UsState>("Washington", UsState.Washington));
             KVPs.Add(new KeyValuePair<string, UsState>("Michigan", UsState.Michigan));
-            KVPs.Add(new KeyValuePair<string, UsState>("Minnesota", UsState.Michigan));
+            KVPs.Add(new KeyValuePair<string, UsState>("Minnesota", UsState.Minnesota));
             KVPs.Add(new KeyValuePair<string, UsState>("Colorado", UsState.Colorado));
             KVPs.Add(new KeyValuePair<string, UsState>("Maryland", UsState.Maryland));
             KVPs.Add(new KeyValuePair<string, UsState>("Nevada", UsState.Nevada));
