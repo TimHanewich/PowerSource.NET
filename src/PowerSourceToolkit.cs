@@ -22,5 +22,12 @@ namespace PowerSource
             }
             return ToReturn.ToArray();
         }
+
+        public static string RandomFromArray(string[] array)
+        {
+            Random r = new Random();
+            int rv = r.Next(0, array.Length);
+            return array[rv];
+        }
     }
 }

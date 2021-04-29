@@ -7,13 +7,13 @@ namespace PowerSource.DataGeneration
 {
     public class NameGenerator
     {
-        private string[] MaleFirstNames;
+        private string[] MaleFirstName;
         private string[] FemaleFirstName;
-        private string[] LastNames;
+        private string[] LastName;
 
         public async Task LoadMaleFirstNamesAsync(Stream file)
         {
-            MaleFirstNames = await PowerSourceToolkit.DelimitedFileToLineArrayAsync(file);
+            MaleFirstName = await PowerSourceToolkit.DelimitedFileToLineArrayAsync(file);
         }
 
         public async Task LoadFemaleFirstNamesAsync(Stream file)
@@ -23,8 +23,22 @@ namespace PowerSource.DataGeneration
 
         public async Task LoadLastNamesAsync(Stream file)
         {
-            LastNames = await PowerSourceToolkit.DelimitedFileToLineArrayAsync(file);
+            LastName = await PowerSourceToolkit.DelimitedFileToLineArrayAsync(file);
         }
         
+        public string RandomMaleFirstName()
+        {
+            return PowerSourceToolkit.RandomFromArray(MaleFirstName);
+        }
+
+        public string RandomFemaleFirstName()
+        {
+            return PowerSourceToolkit.RandomFromArray(FemaleFirstName);
+        }
+
+        public string RandomLastName()
+        {
+            return PowerSourceToolkit.RandomFromArray(LastName);
+        }
     }
 }
