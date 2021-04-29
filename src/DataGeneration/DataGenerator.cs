@@ -234,6 +234,21 @@ namespace PowerSource.DataGeneration
             }
         }
 
+        public float RandomFloat(float min, float max)
+        {
+
+            //Error check
+            if (max <= min)
+            {
+                throw new Exception("Max value was incorrect");
+            }
+            double randpercent = new Random().NextDouble();
+
+            float thick = max - min;
+            float myval = Convert.ToSingle(min + (randpercent * thick));
+            return myval;
+        }
+
         #endregion
     }
 }
