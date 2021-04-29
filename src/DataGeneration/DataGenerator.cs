@@ -34,10 +34,15 @@ namespace PowerSource.DataGeneration
             Domain = await PowerSourceToolkit.DelimitedFileToLineArrayAsync(file);
         }
 
-        //Industry
+        //Industry/company
         public async Task LoadIndustriesAsync(Stream file)
         {
             Industry = await PowerSourceToolkit.DelimitedFileToLineArrayAsync(file);
+        }
+
+        public async Task LoadCompaniesAsync(Stream file)
+        {
+            Company = await PowerSourceToolkit.DelimitedFileToLineArrayAsync(file);
         }
 
         #endregion
@@ -272,13 +277,19 @@ namespace PowerSource.DataGeneration
 
         #endregion
     
-        #region "Industy"
+        #region "Industy/Companies"
 
         private string[] Industry;
+        private string[] Company;
 
         public string RandomIndustry()
         {
             return PowerSourceToolkit.RandomFromArray(Industry);
+        }
+
+        public string RandomCompany()
+        {
+            return PowerSourceToolkit.RandomFromArray(Company);
         }
 
         #endregion
