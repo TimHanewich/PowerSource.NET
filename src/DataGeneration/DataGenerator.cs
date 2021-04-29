@@ -34,6 +34,12 @@ namespace PowerSource.DataGeneration
             Domain = await PowerSourceToolkit.DelimitedFileToLineArrayAsync(file);
         }
 
+        //Industry
+        public async Task LoadIndustriesAsync(Stream file)
+        {
+            Industry = await PowerSourceToolkit.DelimitedFileToLineArrayAsync(file);
+        }
+
         #endregion
 
         #region "Names"
@@ -262,6 +268,17 @@ namespace PowerSource.DataGeneration
             long ToReturnTick = min.Ticks + Convert.ToInt64(thick * rp);
             DateTime ToReturn = new DateTime(ToReturnTick);
             return ToReturn;
+        }
+
+        #endregion
+    
+        #region "Industy"
+
+        private string[] Industry;
+
+        public string RandomIndustry()
+        {
+            return PowerSourceToolkit.RandomFromArray(Industry);
         }
 
         #endregion
