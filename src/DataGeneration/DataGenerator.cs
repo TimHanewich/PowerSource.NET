@@ -218,5 +218,22 @@ namespace PowerSource.DataGeneration
 
         #endregion
 
+        #region "Primitives"
+
+        public bool RandomBoolean()
+        {
+            Random r = new Random();
+            int val = r.Next(0, 2);
+            if (val == 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        #endregion
     }
 }
