@@ -249,6 +249,21 @@ namespace PowerSource.DataGeneration
             return myval;
         }
 
+        public DateTime RandomDateTime(DateTime min, DateTime max)
+        {
+            //Error check
+            if (max <= min)
+            {
+                throw new Exception("Max DateTime was before Min Datetime");
+            }
+
+            long thick = max.Ticks - min.Ticks;
+            double rp = new Random().NextDouble();
+            long ToReturnTick = min.Ticks + Convert.ToInt64(thick * rp);
+            DateTime ToReturn = new DateTime(ToReturnTick);
+            return ToReturn;
+        }
+
         #endregion
     }
 }
