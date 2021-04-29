@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using System.Threading;
 using System.IO;
+using System.Collections.Generic;
 
 namespace PowerSource.DataGeneration
 {
@@ -10,6 +11,8 @@ namespace PowerSource.DataGeneration
         private string[] MaleFirstName;
         private string[] FemaleFirstName;
         private string[] LastName;
+
+        #region "Setup"
 
         public async Task LoadMaleFirstNamesAsync(Stream file)
         {
@@ -26,6 +29,10 @@ namespace PowerSource.DataGeneration
             LastName = await PowerSourceToolkit.DelimitedFileToLineArrayAsync(file);
         }
         
+        #endregion
+
+        #region  "Core"
+
         public string RandomMaleFirstName()
         {
             return PowerSourceToolkit.RandomFromArray(MaleFirstName);
@@ -39,6 +46,37 @@ namespace PowerSource.DataGeneration
         public string RandomLastName()
         {
             return PowerSourceToolkit.RandomFromArray(LastName);
+        }
+    
+        #endregion
+    
+        public string RandomFirstName()
+        {
+            List<string> ToPullFrom = new List<string>();
+            if (MaleFirstName != null)
+            {
+                ToPullFrom.AddRange(MaleFirstName);
+            }
+            if (FemaleFirstName != null)
+            {
+                ToPullFrom.AddRange(FemaleFirstName);
+            }
+            return PowerSourceToolkit.RandomFromArray(ToPullFrom.ToArray());
+        }
+    
+        public string RandomFullName()
+        {
+            return RandomFirstName() + " " + RandomLastName();
+        }
+
+        public string RandomMaleFullName()
+        {
+            return RandomMaleFirstName() + " " + RandomLastName();
+        }
+
+        public string RandomFemaleFullName()
+        {
+            return RandomFemaleFirstName() + " " + RandomLastName();
         }
     }
 }
