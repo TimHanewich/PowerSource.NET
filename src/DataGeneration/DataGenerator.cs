@@ -378,6 +378,17 @@ namespace PowerSource.DataGeneration
             return CitiesInThisState[r];
         }
 
+        public string RandomUsState()
+        {
+            List<string> AllStates = new List<string>();
+            foreach (UsState state in Enum.GetValues(typeof(UsState)))
+            {
+                AllStates.Add(PowerSourceToolkit.UsStateEnumToName(state));
+            }
+            int r = new Random().Next(0, AllStates.Count);
+            return AllStates[r];
+        }
+
         #endregion
     }
 }
