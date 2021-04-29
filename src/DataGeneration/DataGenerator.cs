@@ -45,6 +45,12 @@ namespace PowerSource.DataGeneration
             Company = await PowerSourceToolkit.DelimitedFileToLineArrayAsync(file);
         }
 
+        //Urls
+        public async Task LoadUrlsAsync(Stream file)
+        {
+            Url = await PowerSourceToolkit.DelimitedFileToLineArrayAsync(file);
+        }
+
         #endregion
 
         #region "Names"
@@ -290,6 +296,17 @@ namespace PowerSource.DataGeneration
         public string RandomCompany()
         {
             return PowerSourceToolkit.RandomFromArray(Company);
+        }
+
+        #endregion
+    
+        #region "Url"
+
+        private string[] Url;
+
+        public string RandomUrl()
+        {
+            return PowerSourceToolkit.RandomFromArray(Url);
         }
 
         #endregion
