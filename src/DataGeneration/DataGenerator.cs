@@ -192,5 +192,31 @@ namespace PowerSource.DataGeneration
 
         #endregion
     
+        #region "Phone"
+
+        public string RandomPhone()
+        {
+            Random r = new Random();
+            string ToReturn = "";
+            for (int t = 0; t < 10; t++)
+            {
+                ToReturn = ToReturn + r.Next(0, 10).ToString();
+            }
+            return ToReturn;
+        }
+
+        public string RandomPhone(int area_code)
+        {
+            Random r = new Random();
+            string ToReturn = area_code.ToString();
+            for (int t = 0; t < 7; t++)
+            {
+                ToReturn = ToReturn + r.Next(0, 10).ToString();
+            }
+            return ToReturn;
+        }
+
+        #endregion
+
     }
 }
